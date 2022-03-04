@@ -1,19 +1,15 @@
 const { resolve } = require("path");
-
+const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
-  devtool: false,
   entry: "./index.js",
-  target: ["web", "es2020"],
-  node: false,
+  plugins: [
+    new CopyPlugin({
+      patterns: [{ from: "asset", to: "dest" }],
+    }),
+  ],
   output: {
     scriptType: "module",
     path: resolve(__dirname, "dist"),
     filename: "[name].js",
-    trustedTypes: "bundler",
-    publicPath: "",
   },
-  cache: {
-    maxMemoryGenerations: 1,
-    type: 'filesystem',
-  }
 };
